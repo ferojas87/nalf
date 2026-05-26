@@ -143,7 +143,7 @@
   .deco{position:absolute; z-index:0; pointer-events:none; opacity:.5}
 
   /* globo terráqueo de líneas girando */
-  .globe{top:50%; right:4%; transform:translateY(-50%); width:clamp(210px,21vw,350px); height:clamp(210px,21vw,350px); perspective:1000px; opacity:.6}
+  .globe{top:50%; right:9%; transform:translateY(-50%); width:clamp(240px,28vw,560px); height:clamp(240px,28vw,560px); perspective:1200px; opacity:.5}
   .globe .sph{position:absolute; inset:0; transform-style:preserve-3d; animation:globespin 24s linear infinite}
   .globe .mrd{position:absolute; inset:0; border:1px solid rgba(31,208,182,.55); border-radius:50%}
   .globe .mrd:nth-child(1){transform:rotateY(0deg)}   .globe .mrd:nth-child(2){transform:rotateY(30deg)}
@@ -270,7 +270,7 @@
       <span class="pill"><span class="dot"></span> Formalización del comercio en marcha</span>
     </div>
     <p class="anim" style="margin-top:1.5rem; max-width:62ch">Comercio que se recupera + dolarización + nadie digitalizado todavía. <strong>El primero que ponga tecnología marca la cancha.</strong></p>
-    <svg class="deco chart" style="bottom:9%; right:5%" viewBox="0 0 300 200" aria-hidden="true">
+    <svg class="deco chart" style="top:50%; right:8%; transform:translateY(-50%); width:clamp(240px,26vw,500px)" viewBox="0 0 300 200" aria-hidden="true">
       <line class="axis" x1="20" y1="180" x2="290" y2="180"/><line class="axis" x1="20" y1="20" x2="20" y2="180"/>
       <rect class="bar" x="45" y="120" width="34" height="60" rx="3"/>
       <rect class="bar" x="95" y="95" width="34" height="85" rx="3"/>
