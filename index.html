@@ -143,20 +143,20 @@
   .deco{position:absolute; z-index:0; pointer-events:none; opacity:.5}
 
   /* globo terráqueo de líneas girando */
-  .globe{top:50%; right:5%; transform:translateY(-50%); width:340px; height:340px; perspective:1000px; opacity:.6}
+  .globe{top:50%; right:4%; transform:translateY(-50%); width:clamp(210px,21vw,350px); height:clamp(210px,21vw,350px); perspective:1000px; opacity:.6}
   .globe .sph{position:absolute; inset:0; transform-style:preserve-3d; animation:globespin 24s linear infinite}
   .globe .mrd{position:absolute; inset:0; border:1px solid rgba(31,208,182,.55); border-radius:50%}
   .globe .mrd:nth-child(1){transform:rotateY(0deg)}   .globe .mrd:nth-child(2){transform:rotateY(30deg)}
   .globe .mrd:nth-child(3){transform:rotateY(60deg)}  .globe .mrd:nth-child(4){transform:rotateY(90deg)}
   .globe .mrd:nth-child(5){transform:rotateY(120deg)} .globe .mrd:nth-child(6){transform:rotateY(150deg)}
   .globe .latw{position:absolute; inset:0; transform-style:preserve-3d}
-  .globe .latw.a{transform:translateY(-95px)} .globe .latw.c{transform:translateY(95px)}
+  .globe .latw.a{transform:translateY(-28%)} .globe .latw.c{transform:translateY(28%)}
   .globe .lat{position:absolute; inset:0; border:1px solid rgba(111,182,230,.45); border-radius:50%; transform:rotateX(90deg)}
   .globe .latw.a .lat,.globe .latw.c .lat{transform:rotateX(90deg) scale(.58)}
   @keyframes globespin{from{transform:rotateX(-15deg) rotateY(0)}to{transform:rotateX(-15deg) rotateY(360deg)}}
 
   /* gráfica subiendo */
-  .chart{width:300px; height:200px; opacity:.5}
+  .chart{width:clamp(180px,20vw,300px); height:auto; opacity:.5}
   .chart .axis{stroke:rgba(255,255,255,.18); stroke-width:1}
   .chart .bar{fill:rgba(31,208,182,.18); stroke:var(--brand-l); stroke-width:1.2; transform-box:fill-box; transform-origin:50% 100%; animation:barGrow 5.5s ease-in-out infinite}
   .chart .bar:nth-of-type(2){animation-delay:.25s} .chart .bar:nth-of-type(3){animation-delay:.5s} .chart .bar:nth-of-type(4){animation-delay:.75s}
@@ -167,7 +167,7 @@
   @keyframes arwShow{0%,30%{opacity:0}45%,85%{opacity:1}100%{opacity:0}}
 
   /* robot de líneas */
-  .robot{width:190px; height:220px; opacity:.5; animation:bob2 4.5s ease-in-out infinite}
+  .robot{width:clamp(120px,13vw,190px); height:auto; opacity:.5; animation:bob2 4.5s ease-in-out infinite}
   .robot *{fill:none; stroke:var(--brand-l); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
   .robot .eye{fill:var(--brand-l); stroke:none; transform-box:fill-box; transform-origin:center; animation:blink 4s infinite}
   .robot .ant{fill:var(--blue-l); stroke:none; animation:antp 1.8s ease-in-out infinite}
@@ -176,10 +176,10 @@
   @keyframes antp{0%,100%{opacity:.4}50%{opacity:1}}
 
   /* moneda girando */
-  .coin{width:140px; height:140px; perspective:600px; opacity:.6}
+  .coin{width:clamp(95px,10vw,140px); height:clamp(95px,10vw,140px); perspective:600px; opacity:.6}
   .coin .face{position:absolute; inset:0; border:1.8px solid var(--brand-l); border-radius:50%;
     display:flex; align-items:center; justify-content:center; color:var(--brand-l);
-    font-family:var(--font-d); font-weight:700; font-size:4.2rem; animation:flip 6s linear infinite}
+    font-family:var(--font-d); font-weight:700; font-size:clamp(2.8rem,4vw,4.2rem); animation:flip 6s linear infinite}
   @keyframes flip{to{transform:rotateY(360deg)}}
 
   /* responsive */
