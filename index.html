@@ -139,8 +139,52 @@
   .topbar{position:fixed; top:16px; left:8vw; z-index:50}
   .src{color:var(--dim); font-size:.76rem; margin-top:1.3rem; font-weight:300; max-width:80ch}
 
+  /* ===== decoraciones de líneas (solo desktop) ===== */
+  .deco{position:absolute; z-index:0; pointer-events:none; opacity:.5}
+
+  /* globo terráqueo de líneas girando */
+  .globe{top:50%; right:5%; transform:translateY(-50%); width:340px; height:340px; perspective:1000px; opacity:.6}
+  .globe .sph{position:absolute; inset:0; transform-style:preserve-3d; animation:globespin 24s linear infinite}
+  .globe .mrd{position:absolute; inset:0; border:1px solid rgba(31,208,182,.55); border-radius:50%}
+  .globe .mrd:nth-child(1){transform:rotateY(0deg)}   .globe .mrd:nth-child(2){transform:rotateY(30deg)}
+  .globe .mrd:nth-child(3){transform:rotateY(60deg)}  .globe .mrd:nth-child(4){transform:rotateY(90deg)}
+  .globe .mrd:nth-child(5){transform:rotateY(120deg)} .globe .mrd:nth-child(6){transform:rotateY(150deg)}
+  .globe .latw{position:absolute; inset:0; transform-style:preserve-3d}
+  .globe .latw.a{transform:translateY(-95px)} .globe .latw.c{transform:translateY(95px)}
+  .globe .lat{position:absolute; inset:0; border:1px solid rgba(111,182,230,.45); border-radius:50%; transform:rotateX(90deg)}
+  .globe .latw.a .lat,.globe .latw.c .lat{transform:rotateX(90deg) scale(.58)}
+  @keyframes globespin{from{transform:rotateX(-15deg) rotateY(0)}to{transform:rotateX(-15deg) rotateY(360deg)}}
+
+  /* gráfica subiendo */
+  .chart{width:300px; height:200px; opacity:.5}
+  .chart .axis{stroke:rgba(255,255,255,.18); stroke-width:1}
+  .chart .bar{fill:rgba(31,208,182,.18); stroke:var(--brand-l); stroke-width:1.2; transform-box:fill-box; transform-origin:50% 100%; animation:barGrow 5.5s ease-in-out infinite}
+  .chart .bar:nth-of-type(2){animation-delay:.25s} .chart .bar:nth-of-type(3){animation-delay:.5s} .chart .bar:nth-of-type(4){animation-delay:.75s}
+  .chart .ln{fill:none; stroke:var(--blue-l); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:520; stroke-dashoffset:520; animation:lnDraw 5.5s ease-in-out infinite}
+  .chart .arw{fill:none; stroke:var(--blue-l); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; opacity:0; animation:arwShow 5.5s ease-in-out infinite}
+  @keyframes barGrow{0%{transform:scaleY(0)}26%{transform:scaleY(1)}82%{transform:scaleY(1)}100%{transform:scaleY(0)}}
+  @keyframes lnDraw{0%{stroke-dashoffset:520}38%{stroke-dashoffset:0}85%{stroke-dashoffset:0}100%{stroke-dashoffset:520}}
+  @keyframes arwShow{0%,30%{opacity:0}45%,85%{opacity:1}100%{opacity:0}}
+
+  /* robot de líneas */
+  .robot{width:190px; height:220px; opacity:.5; animation:bob2 4.5s ease-in-out infinite}
+  .robot *{fill:none; stroke:var(--brand-l); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+  .robot .eye{fill:var(--brand-l); stroke:none; transform-box:fill-box; transform-origin:center; animation:blink 4s infinite}
+  .robot .ant{fill:var(--blue-l); stroke:none; animation:antp 1.8s ease-in-out infinite}
+  @keyframes bob2{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes blink{0%,90%,100%{transform:scaleY(1)}95%{transform:scaleY(.12)}}
+  @keyframes antp{0%,100%{opacity:.4}50%{opacity:1}}
+
+  /* moneda girando */
+  .coin{width:140px; height:140px; perspective:600px; opacity:.6}
+  .coin .face{position:absolute; inset:0; border:1.8px solid var(--brand-l); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; color:var(--brand-l);
+    font-family:var(--font-d); font-weight:700; font-size:4.2rem; animation:flip 6s linear infinite}
+  @keyframes flip{to{transform:rotateY(360deg)}}
+
   /* responsive */
   @media(max-width:820px){
+    .deco{display:none !important}
     .g2,.g3,.g4{grid-template-columns:1fr}
     .slide{padding:9vh 7vw; justify-content:flex-start; padding-top:11vh}
     .deck{scroll-snap-type:y proximity}
@@ -164,6 +208,7 @@
   @media(prefers-reduced-motion:reduce){
     .orb,.grad{animation:none}
     .slide .anim{transition:none; opacity:1; transform:none}
+    .globe .sph,.chart .bar,.chart .ln,.chart .arw,.robot,.robot .eye,.robot .ant,.coin .face{animation:none}
   }
 </style>
 </head>
@@ -186,6 +231,13 @@
       <span class="pill"><span class="dot"></span> Venezuela · Colombia · Ecuador</span>
     </div>
     <div class="hint">Scroll ↓</div>
+    <div class="deco globe" aria-hidden="true"><div class="sph">
+      <div class="mrd"></div><div class="mrd"></div><div class="mrd"></div>
+      <div class="mrd"></div><div class="mrd"></div><div class="mrd"></div>
+      <div class="latw a"><div class="lat"></div></div>
+      <div class="latw b"><div class="lat"></div></div>
+      <div class="latw c"><div class="lat"></div></div>
+    </div></div>
   </section>
 
   <!-- 2 · WOW -->
@@ -218,6 +270,15 @@
       <span class="pill"><span class="dot"></span> Formalización del comercio en marcha</span>
     </div>
     <p class="anim" style="margin-top:1.5rem; max-width:62ch">Comercio que se recupera + dolarización + nadie digitalizado todavía. <strong>El primero que ponga tecnología marca la cancha.</strong></p>
+    <svg class="deco chart" style="bottom:9%; right:5%" viewBox="0 0 300 200" aria-hidden="true">
+      <line class="axis" x1="20" y1="180" x2="290" y2="180"/><line class="axis" x1="20" y1="20" x2="20" y2="180"/>
+      <rect class="bar" x="45" y="120" width="34" height="60" rx="3"/>
+      <rect class="bar" x="95" y="95" width="34" height="85" rx="3"/>
+      <rect class="bar" x="145" y="65" width="34" height="115" rx="3"/>
+      <rect class="bar" x="195" y="35" width="34" height="145" rx="3"/>
+      <polyline class="ln" points="30,150 62,130 112,108 162,75 240,30"/>
+      <polyline class="arw" points="222,34 240,30 236,48"/>
+    </svg>
   </section>
 
   <!-- 4 · SOCIOS -->
@@ -278,6 +339,7 @@
       </div>
     </div>
     <p class="src anim">Cifras de benchmark preliminar — a calibrar con volúmenes y costos reales.</p>
+    <div class="deco coin" style="top:9%; right:6%" aria-hidden="true"><div class="face">$</div></div>
   </section>
 
   <!-- 7 · TIMELINE (NEW) -->
@@ -329,6 +391,18 @@
       <div><div class="stat grad">60–70%</div><div class="lbl">Menos tiempo de preparación de despacho</div></div>
       <div><div class="stat grad">95%+</div><div class="lbl">Precisión extrayendo datos de documentos</div></div>
     </div>
+    <svg class="deco robot" style="top:8%; right:5%" viewBox="0 0 200 230" aria-hidden="true">
+      <line x1="100" y1="40" x2="100" y2="24"/><circle class="ant" cx="100" cy="17" r="6"/>
+      <rect x="62" y="40" width="76" height="58" rx="12"/>
+      <circle class="eye" cx="84" cy="66" r="6"/><circle class="eye" cx="116" cy="66" r="6"/>
+      <line x1="84" y1="86" x2="116" y2="86"/><line x1="100" y1="98" x2="100" y2="110"/>
+      <rect x="58" y="110" width="84" height="68" rx="10"/>
+      <circle cx="100" cy="135" r="9"/><line x1="80" y1="158" x2="120" y2="158"/>
+      <line x1="58" y1="124" x2="36" y2="150"/><circle cx="32" cy="156" r="6"/>
+      <line x1="142" y1="124" x2="164" y2="150"/><circle cx="168" cy="156" r="6"/>
+      <line x1="80" y1="178" x2="80" y2="208"/><line x1="120" y1="178" x2="120" y2="208"/>
+      <line x1="72" y1="210" x2="88" y2="210"/><line x1="112" y1="210" x2="128" y2="210"/>
+    </svg>
   </section>
 
   <!-- 10 · VALOR QUE SE CONSTRUYE (NEW) -->
@@ -341,6 +415,15 @@
       <div class="card"><span class="tag">Escala</span><h3>Adquisición en 3 países</h3><p>El motor de marketing y adquisición <strong>no es para un país: sirve a los tres.</strong> Se construye una vez y escala a Venezuela, Colombia y Ecuador sin costo marginal.</p></div>
     </div>
     <p class="lead anim" style="margin-top:1.8rem">Eficiencia hoy; <span class="grad">marca, data y distribución que componen</span> mañana.</p>
+    <svg class="deco chart" style="top:11%; right:5%" viewBox="0 0 300 200" aria-hidden="true">
+      <line class="axis" x1="20" y1="180" x2="290" y2="180"/><line class="axis" x1="20" y1="20" x2="20" y2="180"/>
+      <rect class="bar" x="45" y="130" width="34" height="50" rx="3"/>
+      <rect class="bar" x="95" y="100" width="34" height="80" rx="3"/>
+      <rect class="bar" x="145" y="70" width="34" height="110" rx="3"/>
+      <rect class="bar" x="195" y="30" width="34" height="150" rx="3"/>
+      <polyline class="ln" points="30,155 62,135 112,100 162,70 240,28"/>
+      <polyline class="arw" points="222,32 240,28 236,46"/>
+    </svg>
   </section>
 
   <!-- 11 · VENTAJA INJUSTA -->
